@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hernando Boqueria SL — Panel</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#1a1a1a;background:#f5f5f0}
+.hidden{display:none!important}
+#login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f5f5f0}
+.login-card{background:#fff;border:1px solid #e5e5e0;border-radius:12px;padding:2.5rem;width:340px;box-shadow:0 2px 16px rgba(0,0,0,0.06)}
+.login-logo{font-size:20px;font-weight:600;margin-bottom:4px}
+.login-sub{font-size:13px;color:#888;margin-bottom:2rem}
+.field{margin-bottom:1rem}
+.field label{font-size:12px;color:#666;display:block;margin-bottom:6px;font-weight:500}
+.field input{width:100%;font-size:14px;padding:9px 12px;border:1px solid #ddd;border-radius:8px;background:#fff;color:#1a1a1a;outline:none}
+.field input:focus{border-color:#888}
+.btn{font-size:13px;padding:9px 16px;border:1px solid #ddd;border-radius:8px;background:#fff;color:#1a1a1a;cursor:pointer;transition:all 0.15s}
+.btn:hover{background:#f5f5f0}
+.btn-primary{background:#1a1a1a;color:#fff;border-color:#1a1a1a;width:100%}
+.btn-primary:hover{opacity:0.85}
+.btn-sm{width:auto;padding:6px 14px;font-size:13px}
+.login-error{font-size:12px;color:#c0392b;margin-top:10px;display:none}
+#app{display:none;min-height:100vh;background:#f5f5f0}
+.app-inner{max-width:1100px;margin:0 auto;padding:1.5rem}
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid #e5e5e0;flex-wrap:wrap;gap:8px}
+.logo{font-size:18px;font-weight:600}
+.logo span{font-size:13px;font-weight:400;color:#888;margin-left:8px}
+.header-right{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.status-pill{font-size:12px;color:#666;display:flex;align-items:center;gap:5px;padding:5px 10px;border:1px solid #e5e5e0;border-radius:20px;background:#fff}
+.dot{width:7px;height:7px;border-radius:50%;background:#27ae60}
+.dot.red{background:#e74c3c}
+.tabs{display:flex;gap:0;margin-bottom:1.5rem;border-bottom:1px solid #e5e5e0}
+.tab{font-size:14px;padding:9px 20px;cursor:pointer;border-bottom:2px solid transparent;color:#888;background:none;border-top:none;border-left:none;border-right:none;transition:all 0.15s}
+.tab.active{color:#1a1a1a;border-bottom-color:#1a1a1a;font-weight:500}
+.tab:hover{color:#1a1a1a}
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:1.5rem}
+.metric{background:#fff;border:1px solid #e5e5e0;border-radius:10px;padding:1rem}
+.metric-label{font-size:12px;color:#888;margin-bottom:6px}
+.metric-value{font-size:24px;font-weight:600}
+.metric-sub{font-size:11px;color:#aaa;margin-top:3px}
+.section-title{font-size:12px;font-weight:600;color:#888;margin-bottom:10px;text-transform:uppercase;letter-spacing:0.05em}
+.table-wrap{overflow-x:auto;border:1px solid #e5e5e0;border-radius:10px;margin-bottom:1.5rem;background:#fff}
+table{width:100%;font-size:13px;border-collapse:collapse}
+th{text-align:left;padding:10px 14px;font-weight:500;font-size:12px;color:#888;border-bottom:1px solid #f0f0eb;background:#fafafa}
+td{padding:9px 14px;border-bottom:1px solid #f0f0eb;color:#1a1a1a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:220px}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#fafafa}
+.badge{font-size:11px;padding:2px 9px;border-radius:20px;display:inline-block;font-weight:500}
+.b-encargo{background:#FEF3E2;color:#8B5000}
+.b-sobrante{background:#E8F8F0;color:#1A6B40}
+.b-merma{background:#FEE8E4;color:#7A2515}
+.b-ventas{background:#E3F0FD;color:#0A4A8A}
+.filter-bar{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;align-items:center}
+.filter-bar input,.filter-bar select{font-size:13px;padding:7px 10px;border:1px solid #ddd;border-radius:8px;background:#fff;color:#1a1a1a;outline:none}
+.filter-bar input:focus,.filter-bar select:focus{border-color:#888}
+.chart-wrap{position:relative;width:100%;background:#fff;border:1px solid #e5e5e0;border-radius:10px;padding:1rem;margin-bottom:1.5rem}
+.empty{padding:3rem;text-align:center;color:#aaa;font-size:13px}
+.loading{padding:2.5rem;text-align:center;color:#aaa;font-size:13px}
+.reporte-card{background:#fff;border:1px solid #e5e5e0;border-radius:10px;padding:1.25rem;margin-bottom:1rem}
+.reporte-fecha{font-size:12px;color:#888;margin-bottom:10px;font-weight:500}
+.reporte-body{font-size:13px;white-space:pre-wrap;line-height:1.7;color:#1a1a1a}
+.api-setup{background:#fff;border:1px solid #e5e5e0;border-radius:10px;padding:1.25rem;margin-bottom:1.5rem}
+.api-setup p{font-size:13px;color:#666;margin-bottom:10px}
+.api-row{display:flex;gap:8px}
+.api-row input{flex:1;font-size:13px;padding:8px 10px;border:1px solid #ddd;border-radius:8px;background:#fff;color:#1a1a1a;outline:none}
+@media(max-width:600px){.logo span{display:none}.tab{padding:8px 12px;font-size:13px}}
+</style>
+</head>
+<body>
+
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">Hernando Boqueria SL</div>
+    <div class="login-sub">Panel de gestión interno</div>
+    <div class="field">
+      <label>Contraseña</label>
+      <input type="password" id="pwd" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <button class="btn btn-primary" onclick="doLogin()">Entrar</button>
+    <div class="login-error" id="login-error">Contraseña incorrecta</div>
+  </div>
+</div>
+
+<div id="app">
+  <div class="app-inner">
+    <div class="header">
+      <div class="logo">Hernando Boqueria SL <span>Panel de gestión</span></div>
+      <div class="header-right">
+        <div class="status-pill"><span class="dot red" id="dot"></span><span id="conn-text">Sin datos</span></div>
+        <button class="btn btn-sm" onclick="toggleSetup()">API Key</button>
+        <button class="btn btn-sm btn-primary" onclick="loadAll()">Actualizar</button>
+        <button class="btn btn-sm" onclick="doLogout()">Salir</button>
+      </div>
+    </div>
+
+    <div id="setup-bar" class="api-setup hidden">
+      <p>Introduce tu Google Sheets API Key. El Sheets debe estar compartido como "cualquier persona con el enlace puede ver".</p>
+      <div class="api-row">
+        <input type="text" id="apiKey" placeholder="AIzaSy...">
+        <button class="btn btn-primary btn-sm" onclick="saveKey()">Guardar y cargar</button>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('stock')">Stock</button>
+      <button class="tab" onclick="switchTab('ventas')">Ventas</button>
+      <button class="tab" onclick="switchTab('merma')">Merma</button>
+      <button class="tab" onclick="switchTab('reportes')">Reportes</button>
+    </div>
+
+    <div id="tab-stock"><div class="loading">Introduce la API Key para cargar datos.</div></div>
+    <div id="tab-ventas" class="hidden"></div>
+    <div id="tab-merma" class="hidden"></div>
+    <div id="tab-reportes" class="hidden"></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const PASS='6840ss';
+const SHEET_ID='18yHeevVu9w6VEVn_aEOs2nUGse2nO3oFDen_xY-N4QM';
+const TABS=['stock','ventas','merma','reportes'];
+let DATA={stock:[],ventas:[],merma:[],reporte:[]};
+let charts={};
+let apiKey='';
+
+function doLogin(){
+  if(document.getElementById('pwd').value===PASS){
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('app').style.display='block';
+    const k=localStorage.getItem('hb_api_key');
+    if(k){apiKey=k;loadAll();}else toggleSetup();
+  }else{
+    document.getElementById('login-error').style.display='block';
+  }
+}
+function doLogout(){
+  document.getElementById('login-screen').style.display='flex';
+  document.getElementById('app').style.display='none';
+  document.getElementById('pwd').value='';
+}
+function toggleSetup(){
+  const b=document.getElementById('setup-bar');
+  b.classList.toggle('hidden');
+  if(!b.classList.contains('hidden')&&apiKey)document.getElementById('apiKey').value=apiKey;
+}
+function saveKey(){
+  apiKey=document.getElementById('apiKey').value.trim();
+  localStorage.setItem('hb_api_key',apiKey);
+  document.getElementById('setup-bar').classList.add('hidden');
+  loadAll();
+}
+function switchTab(tab){
+  TABS.forEach((t,i)=>{
+    document.getElementById('tab-'+t).classList.toggle('hidden',t!==tab);
+    document.querySelectorAll('.tab')[i].classList.toggle('active',t===tab);
+  });
+}
+async function fetchSheet(name){
+  if(!apiKey)throw new Error('Sin API Key');
+  const r=await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(name)}?key=${apiKey}`);
+  if(!r.ok){const e=await r.json();throw new Error(e.error?.message||'Error API');}
+  const d=await r.json();
+  const rows=d.values||[];
+  if(rows.length<2)return[];
+  const h=rows[0];
+  return rows.slice(1).map(row=>Object.fromEntries(h.map((c,i)=>[c,row[i]||''])));
+}
+async function loadAll(){
+  TABS.forEach(t=>{
+    document.getElementById('tab-'+t).innerHTML='<div class="loading">Cargando...</div>';
+    if(t!=='stock')document.getElementById('tab-'+t).classList.add('hidden');
+  });
+  try{
+    const[stock,ventas,merma,reporte]=await Promise.all([
+      fetchSheet('STOCK'),fetchSheet('VENTAS'),fetchSheet('MERMA'),fetchSheet('REPORTE_SEMANAL')
+    ]);
+    DATA={stock,ventas,merma,reporte};
+    document.getElementById('dot').classList.remove('red');
+    document.getElementById('conn-text').textContent='Conectado';
+    renderStock();renderVentas();renderMerma();renderReporte();
+  }catch(e){
+    TABS.forEach(t=>document.getElementById('tab-'+t).innerHTML=`<div class="empty">Error: ${e.message}</div>`);
+    document.getElementById('dot').classList.add('red');
+    document.getElementById('conn-text').textContent='Error';
+  }
+}
+function num(v){return parseFloat(String(v||0).replace(',','.'))||0;}
+
+function renderStock(){
+  const el=document.getElementById('tab-stock');
+  const rows=DATA.stock.filter(r=>r.producto&&!r._error);
+  const enc=rows.filter(r=>r._tipo==='encargo').reduce((s,r)=>s+num(r.cantidad),0);
+  const sob=rows.filter(r=>r._tipo==='sobrante').reduce((s,r)=>s+num(r.cantidad),0);
+  const prods=new Set(rows.map(r=>r.producto)).size;
+  el.innerHTML=`
+    <div class="metrics">
+      <div class="metric"><div class="metric-label">Productos distintos</div><div class="metric-value">${prods}</div></div>
+      <div class="metric"><div class="metric-label">Total encargos</div><div class="metric-value">${Math.round(enc).toLocaleString('es-ES')}</div><div class="metric-sub">unidades</div></div>
+      <div class="metric"><div class="metric-label">Total sobrantes</div><div class="metric-value">${Math.round(sob).toLocaleString('es-ES')}</div><div class="metric-sub">unidades</div></div>
+      <div class="metric"><div class="metric-label">Registros totales</div><div class="metric-value">${rows.length}</div></div>
+    </div>
+    <div class="filter-bar">
+      <input type="text" id="s-q" placeholder="Buscar producto..." oninput="fStock()" style="flex:1;min-width:150px">
+      <select id="s-tipo" onchange="fStock()">
+        <option value="">Todos los tipos</option>
+        <option value="encargo">Encargo</option>
+        <option value="sobrante">Sobrante</option>
+      </select>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Fecha</th><th>Parada</th><th>Producto</th><th style="text-align:right">Cant.</th><th>Tipo</th></tr></thead>
+      <tbody id="s-body"></tbody>
+    </table></div>`;
+  fStock();
+}
+function fStock(){
+  const q=(document.getElementById('s-q').value||'').toLowerCase();
+  const tipo=document.getElementById('s-tipo').value;
+  const rows=DATA.stock.filter(r=>{
+    if(!r.producto||r._error)return false;
+    if(tipo&&r._tipo!==tipo)return false;
+    if(q&&!r.producto.toLowerCase().includes(q))return false;
+    return true;
+  }).slice(-300).reverse();
+  document.getElementById('s-body').innerHTML=rows.length?rows.map(r=>`<tr>
+    <td>${r.fecha_hora||'—'}</td><td>${(r.parada||'').replace(/_/g,' ')}</td>
+    <td>${(r.producto||'').replace(/_/g,' ')}</td>
+    <td style="text-align:right">${r.cantidad||0}</td>
+    <td><span class="badge b-${r._tipo==='encargo'?'encargo':'sobrante'}">${r._tipo||'—'}</span></td>
+  </tr>`).join(''):'<tr><td colspan="5" class="empty">Sin resultados</td></tr>';
+}
+
+function renderVentas(){
+  const el=document.getElementById('tab-ventas');
+  const rows=DATA.ventas.filter(r=>r.fecha_hora&&r.producto&&r.producto!='_formato_ok'&&r.cantidad);
+  const totalImp=rows.reduce((s,r)=>s+num(r.importe),0);
+  const totalUds=rows.reduce((s,r)=>s+num(r.cantidad),0);
+  const byP={};
+  rows.forEach(r=>{const p=r.producto||'—';if(!byP[p])byP[p]={uds:0,imp:0};byP[p].uds+=num(r.cantidad);byP[p].imp+=num(r.importe);});
+  const top=Object.entries(byP).sort((a,b)=>b[1].imp-a[1].imp).slice(0,10);
+  const chartH=Math.max(200,top.length*40+80);
+  el.innerHTML=`
+    <div class="metrics">
+      <div class="metric"><div class="metric-label">Importe total</div><div class="metric-value">${Math.round(totalImp).toLocaleString('es-ES')}€</div></div>
+      <div class="metric"><div class="metric-label">Unidades vendidas</div><div class="metric-value">${Math.round(totalUds).toLocaleString('es-ES')}</div></div>
+      <div class="metric"><div class="metric-label">Líneas</div><div class="metric-value">${rows.length}</div></div>
+      <div class="metric"><div class="metric-label">Productos</div><div class="metric-value">${Object.keys(byP).length}</div></div>
+    </div>
+    <div class="section-title">Top productos por importe</div>
+    <div class="chart-wrap" style="height:${chartH}px">
+      <canvas id="cv" role="img" aria-label="Top productos por importe"></canvas>
+    </div>
+    <div class="filter-bar">
+      <input type="text" id="v-q" placeholder="Buscar producto..." oninput="fVentas()" style="flex:1;min-width:150px">
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Fecha</th><th>Producto</th><th style="text-align:right">Cant.</th><th style="text-align:right">Importe</th></tr></thead>
+      <tbody id="v-body"></tbody>
+    </table></div>`;
+  if(charts.v)charts.v.destroy();
+  charts.v=new Chart(document.getElementById('cv'),{
+    type:'bar',
+    data:{labels:top.map(([p])=>p.replace(/_/g,' ')),datasets:[{label:'Importe €',data:top.map(([,v])=>Math.round(v.imp)),backgroundColor:'#378ADD',borderRadius:4}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(0,0,0,0.05)'}},y:{grid:{display:false},ticks:{font:{size:11}}}}}
+  });
+  fVentas();
+}
+function fVentas(){
+  const q=(document.getElementById('v-q').value||'').toLowerCase();
+  const rows=DATA.ventas.filter(r=>r.fecha_hora&&r.producto&&r.producto!='_formato_ok'&&r.cantidad&&(!q||r.producto.toLowerCase().includes(q))).slice(-300).reverse();
+  document.getElementById('v-body').innerHTML=rows.length?rows.map(r=>`<tr>
+    <td>${r.fecha_hora||'—'}</td><td>${(r.producto||'').replace(/_/g,' ')}</td>
+    <td style="text-align:right">${r.cantidad||0}</td>
+    <td style="text-align:right">${r.importe?num(r.importe).toFixed(2)+'€':'—'}</td>
+  </tr>`).join(''):'<tr><td colspan="4" class="empty">Sin resultados</td></tr>';
+}
+
+function renderMerma(){
+  const el=document.getElementById('tab-merma');
+  const rows=DATA.merma.filter(r=>r.fecha_hora&&r.producto);
+  const total=rows.reduce((s,r)=>s+num(r.cantidad),0);
+  const byP={};rows.forEach(r=>{const p=r.producto||'—';byP[p]=(byP[p]||0)+num(r.cantidad);});
+  el.innerHTML=`
+    <div class="metrics">
+      <div class="metric"><div class="metric-label">Total merma</div><div class="metric-value">${Math.round(total).toLocaleString('es-ES')}</div><div class="metric-sub">unidades</div></div>
+      <div class="metric"><div class="metric-label">Productos afectados</div><div class="metric-value">${Object.keys(byP).length}</div></div>
+      <div class="metric"><div class="metric-label">Registros</div><div class="metric-value">${rows.length}</div></div>
+    </div>
+    <div class="filter-bar">
+      <input type="text" id="m-q" placeholder="Buscar producto..." oninput="fMerma()" style="flex:1;min-width:150px">
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Fecha</th><th>Parada</th><th>Producto</th><th style="text-align:right">Cant.</th><th>Motivo</th></tr></thead>
+      <tbody id="m-body"></tbody>
+    </table></div>`;
+  fMerma();
+}
+function fMerma(){
+  const q=(document.getElementById('m-q').value||'').toLowerCase();
+  const rows=DATA.merma.filter(r=>r.fecha_hora&&r.producto&&(!q||r.producto.toLowerCase().includes(q))).slice(-300).reverse();
+  document.getElementById('m-body').innerHTML=rows.length?rows.map(r=>`<tr>
+    <td>${r.fecha_hora||'—'}</td><td>${(r.parada||'').replace(/_/g,' ')}</td>
+    <td>${(r.producto||'').replace(/_/g,' ')}</td>
+    <td style="text-align:right">${r.cantidad||0}</td>
+    <td>${r.motivo||'—'}</td>
+  </tr>`).join(''):'<tr><td colspan="5" class="empty">Sin resultados</td></tr>';
+}
+
+function renderReporte(){
+  const el=document.getElementById('tab-reportes');
+  const rows=DATA.reporte.filter(r=>r.fecha_hora).slice().reverse();
+  el.innerHTML=rows.length?rows.map(r=>`
+    <div class="reporte-card">
+      <div class="reporte-fecha">${r.fecha_hora}</div>
+      <div class="reporte-body">${(r.reporte||'').slice(0,1200)}${(r.reporte||'').length>1200?'\n…':''}</div>
+    </div>`).join(''):'<div class="empty">Sin reportes generados todavía.</div>';
+}
+</script>
+</body>
+</html>
