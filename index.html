@@ -14,15 +14,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#1
 .login-sub{font-size:13px;color:#888;margin-bottom:2rem}
 .field{margin-bottom:1rem}
 .field label{font-size:12px;color:#666;display:block;margin-bottom:6px;font-weight:500}
-.field input{width:100%;font-size:14px;padding:9px 12px;border:1px solid #ddd;border-radius:8px;background:#fff;color:#1a1a1a;outline:none}
-.field input:focus{border-color:#888}
+.field input,.field select,.field textarea{width:100%;font-size:14px;padding:9px 12px;border:1px solid #ddd;border-radius:8px;background:#fff;color:#1a1a1a;outline:none}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#888}
+.field textarea{resize:vertical;min-height:80px}
 .btn{font-size:13px;padding:9px 16px;border:1px solid #ddd;border-radius:8px;background:#fff;color:#1a1a1a;cursor:pointer;transition:all 0.15s}
 .btn:hover{background:#f5f5f0}
-.btn-primary{background:#1a1a1a;color:#fff;border-color:#1a1a1a;width:100%}
+.btn-primary{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
 .btn-primary:hover{opacity:0.85}
-.btn-sm{width:auto;padding:6px 14px;font-size:13px}
+.btn-full{width:100%}
+.btn-sm{padding:6px 14px;font-size:13px}
 .btn-danger{background:#c0392b;color:#fff;border-color:#c0392b}
 .btn-danger:hover{opacity:0.85}
+.btn-success{background:#27ae60;color:#fff;border-color:#27ae60}
+.btn-success:hover{opacity:0.85}
 .login-error{font-size:12px;color:#c0392b;margin-top:10px;display:none}
 #app{display:none;min-height:100vh;background:#f5f5f0}
 .app-inner{max-width:1200px;margin:0 auto;padding:1.5rem}
@@ -33,7 +37,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#1
 .status-pill{font-size:12px;color:#666;display:flex;align-items:center;gap:5px;padding:5px 10px;border:1px solid #e5e5e0;border-radius:20px;background:#fff}
 .dot{width:7px;height:7px;border-radius:50%;background:#27ae60;display:inline-block}
 .dot.red{background:#e74c3c}
-.dot.yellow{background:#f39c12}
 .tabs{display:flex;gap:0;margin-bottom:1.5rem;border-bottom:1px solid #e5e5e0;overflow-x:auto}
 .tab{font-size:14px;padding:9px 18px;cursor:pointer;border-bottom:2px solid transparent;color:#888;background:none;border-top:none;border-left:none;border-right:none;white-space:nowrap;transition:all 0.15s}
 .tab.active{color:#1a1a1a;border-bottom-color:#1a1a1a;font-weight:500}
@@ -51,14 +54,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#1
 .table-wrap{overflow-x:auto;border:1px solid #e5e5e0;border-radius:10px;margin-bottom:1.5rem;background:#fff}
 table{width:100%;font-size:13px;border-collapse:collapse}
 th{text-align:left;padding:10px 14px;font-weight:500;font-size:12px;color:#888;border-bottom:1px solid #f0f0eb;background:#fafafa;white-space:nowrap}
-td{padding:9px 14px;border-bottom:1px solid #f0f0eb;color:#1a1a1a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:220px}
+td{padding:9px 14px;border-bottom:1px solid #f0f0eb;color:#1a1a1a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:200px}
 tr:last-child td{border-bottom:none}
 tr:hover td{background:#fafafa}
 .badge{font-size:11px;padding:2px 9px;border-radius:20px;display:inline-block;font-weight:500}
 .b-encargo{background:#FEF3E2;color:#8B5000}
 .b-sobrante{background:#E8F8F0;color:#1A6B40}
 .b-merma{background:#FEE8E4;color:#7A2515}
-.b-ventas{background:#E3F0FD;color:#0A4A8A}
 .b-alert{background:#FEE8E4;color:#7A2515}
 .b-ok{background:#E8F8F0;color:#1A6B40}
 .b-warn{background:#FEF3E2;color:#8B5000}
@@ -70,7 +72,7 @@ tr:hover td{background:#fafafa}
 .loading{padding:2.5rem;text-align:center;color:#aaa;font-size:13px}
 .reporte-card{background:#fff;border:1px solid #e5e5e0;border-radius:10px;padding:1.25rem;margin-bottom:1rem}
 .reporte-fecha{font-size:12px;color:#888;margin-bottom:10px;font-weight:500}
-.reporte-body{font-size:13px;white-space:pre-wrap;line-height:1.7;color:#1a1a1a}
+.reporte-body{font-size:13px;white-space:pre-wrap;line-height:1.7}
 .api-setup{background:#fff;border:1px solid #e5e5e0;border-radius:10px;padding:1.25rem;margin-bottom:1.5rem}
 .api-setup p{font-size:13px;color:#666;margin-bottom:10px}
 .api-row{display:flex;gap:8px}
@@ -89,10 +91,28 @@ tr:hover td{background:#fafafa}
 .day-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px}
 .day-metric .label{font-size:11px;color:#888;margin-bottom:4px}
 .day-metric .val{font-size:20px;font-weight:600;color:#fff}
-.tabs-sub{display:flex;gap:4px;margin-bottom:1rem}
-.tab-sub{font-size:12px;padding:5px 12px;border:1px solid #e5e5e0;border-radius:20px;cursor:pointer;background:#fff;color:#888}
-.tab-sub.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
-@media(max-width:700px){.grid-2{grid-template-columns:1fr}.logo span{display:none}.tab{padding:8px 12px;font-size:13px}}
+/* Fase 2 - Formularios */
+.form-card{background:#fff;border:1px solid #e5e5e0;border-radius:10px;padding:1.5rem;margin-bottom:1.5rem}
+.form-card h3{font-size:15px;font-weight:600;margin-bottom:1.25rem;padding-bottom:0.75rem;border-bottom:1px solid #f0f0eb}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px}
+.form-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:1rem;padding-top:1rem;border-top:1px solid #f0f0eb}
+.toast{position:fixed;bottom:24px;right:24px;background:#1a1a1a;color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;z-index:9999;opacity:0;transition:opacity 0.3s;pointer-events:none}
+.toast.show{opacity:1}
+.toast.error{background:#c0392b}
+.toast.success{background:#27ae60}
+.tabs-form{display:flex;gap:4px;margin-bottom:1.25rem}
+.tab-form{font-size:13px;padding:6px 14px;border:1px solid #e5e5e0;border-radius:20px;cursor:pointer;background:#fff;color:#888}
+.tab-form.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.xls-drop{border:2px dashed #ddd;border-radius:10px;padding:2rem;text-align:center;cursor:pointer;margin-bottom:1rem;transition:border-color 0.2s}
+.xls-drop:hover{border-color:#888}
+.xls-drop p{font-size:14px;color:#888;margin-bottom:8px}
+.xls-drop small{font-size:12px;color:#aaa}
+.xls-preview{background:#f5f5f0;border-radius:8px;padding:1rem;margin-bottom:1rem;max-height:300px;overflow-y:auto}
+.xls-preview table{font-size:12px}
+.progress-bar{height:4px;background:#e5e5e0;border-radius:2px;margin:8px 0}
+.progress-fill{height:100%;background:#1a1a1a;border-radius:2px;transition:width 0.3s}
+@media(max-width:700px){.grid-2,.form-row,.form-row-3{grid-template-columns:1fr}.logo span{display:none}.tab{padding:8px 12px;font-size:13px}}
 </style>
 </head>
 <body>
@@ -105,7 +125,7 @@ tr:hover td{background:#fafafa}
       <label>Contraseña</label>
       <input type="password" id="pwd" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
     </div>
-    <button class="btn btn-primary" onclick="doLogin()">Entrar</button>
+    <button class="btn btn-primary btn-full" onclick="doLogin()">Entrar</button>
     <div class="login-error" id="login-error">Contraseña incorrecta</div>
   </div>
 </div>
@@ -137,6 +157,7 @@ tr:hover td{background:#fafafa}
       <button class="tab" onclick="switchTab('merma')">Merma</button>
       <button class="tab" onclick="switchTab('albaranes')">Albaranes</button>
       <button class="tab" onclick="switchTab('alertas')">Alertas</button>
+      <button class="tab" onclick="switchTab('registrar')">+ Registrar</button>
       <button class="tab" onclick="switchTab('reportes')">Reportes</button>
     </div>
 
@@ -146,18 +167,28 @@ tr:hover td{background:#fafafa}
     <div id="tab-merma" class="hidden"></div>
     <div id="tab-albaranes" class="hidden"></div>
     <div id="tab-alertas" class="hidden"></div>
+    <div id="tab-registrar" class="hidden"></div>
     <div id="tab-reportes" class="hidden"></div>
   </div>
 </div>
 
+<div class="toast" id="toast"></div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
 const PASS='6840ss';
 const SHEET_ID='18yHeevVu9w6VEVn_aEOs2nUGse2nO3oFDen_xY-N4QM';
-const TABS=['resumen','ventas','stock','merma','albaranes','alertas','reportes'];
+const WEBHOOK='https://n8nn-n8n.vhekam.easypanel.host/webhook/hernando-panel';
+const TABS=['resumen','ventas','stock','merma','albaranes','alertas','registrar','reportes'];
+const PRODUCTOS_CHICKEN=['burrito_horno_Carnita','burrito_horno_Pollo','burrito_horno_BBQ','burrito_horno_Bacon','burrito_rebozado_BBQ','burrito_rebozado_Caprese','burrito_rebozado_Bacon','burrito_rebozado_Pollo','burrito_rebozado_Chorizo','burrito_rebozado_J_y_Q','burrito_rebozado_Aguacate','burrito_rebozado_4_Queso','burrito_rebozado_Carne','corn_dog','pinchos_souvlaki','chip_verduras','zumo','cerveza','cocacola','agua'];
+const PRODUCTOS_MED=['empanada_argentina_J_y_Q','empanada_argentina_Vegana','empanada_argentina_4_Queso','empanada_argentina_Carne','empanada_argentina_Chorizo','empanada_argentina_Carne_picante','empanada_argentina_Pollo','empanada_argentina_Pollo_picante','empanada_argentina_Caprese','empanada_argentina_Curry','empanada_argentina_Berenjena','empanada_argentina_Champi','empanada_brasilena_Pollo','empanada_brasilena_Espinacas','empanada_brasilena_Olivas','empanada_brasilena_Chorizo','empanada_brasilena_Mozzarella','empanada_brasilena_Carne_cebolla','empanada_brasilena_Carne_picante','hojaldre_griego','espirales','cerveza','cocacola_normal','cocacola_zero','agua_con_gas','agua_sin_gas','vino'];
+const TODOS_PRODUCTOS=[...new Set([...PRODUCTOS_CHICKEN,...PRODUCTOS_MED])].sort();
+
 let DATA={stock:[],ventas:[],merma:[],albaranes:[],reporte:[]};
 let charts={};
 let apiKey='';
+let xlsData=[];
 
 function doLogin(){
   if(document.getElementById('pwd').value===PASS){
@@ -190,6 +221,12 @@ function switchTab(tab){
     document.getElementById('tab-'+t).classList.toggle('hidden',t!==tab);
     document.querySelectorAll('.tab')[i].classList.toggle('active',t===tab);
   });
+  if(tab==='registrar')renderRegistrar();
+}
+function showToast(msg,type='success'){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.className='toast '+type+' show';
+  setTimeout(()=>t.classList.remove('show'),3000);
 }
 async function fetchSheet(name){
   if(!apiKey)throw new Error('Sin API Key');
@@ -201,13 +238,19 @@ async function fetchSheet(name){
   const h=rows[0];
   return rows.slice(1).map(row=>Object.fromEntries(h.map((c,i)=>[c,row[i]||''])));
 }
+async function postWebhook(data){
+  const r=await fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+  if(!r.ok)throw new Error('Error webhook: '+r.status);
+  return await r.json();
+}
 async function loadAll(){
   TABS.forEach(t=>{
-    document.getElementById('tab-'+t).innerHTML='<div class="loading">Cargando...</div>';
-    if(t!=='resumen')document.getElementById('tab-'+t).classList.add('hidden');
+    if(t!=='registrar'){
+      document.getElementById('tab-'+t).innerHTML='<div class="loading">Cargando...</div>';
+      if(t!=='resumen')document.getElementById('tab-'+t).classList.add('hidden');
+    }
   });
-  Object.keys(charts).forEach(k=>{try{charts[k].destroy();}catch(e){}});
-  charts={};
+  Object.keys(charts).forEach(k=>{try{charts[k].destroy();}catch(e){}});charts={};
   try{
     const[stock,ventas,merma,albaranes,reporte]=await Promise.all([
       fetchSheet('STOCK'),fetchSheet('VENTAS'),fetchSheet('MERMA'),
@@ -218,24 +261,20 @@ async function loadAll(){
     document.getElementById('conn-text').textContent='Conectado · '+new Date().toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'});
     renderResumen();renderVentas();renderStock();renderMerma();renderAlbaranes();renderAlertas();renderReporte();
   }catch(e){
-    TABS.forEach(t=>document.getElementById('tab-'+t).innerHTML=`<div class="empty">Error: ${e.message}</div>`);
+    TABS.forEach(t=>{if(t!=='registrar')document.getElementById('tab-'+t).innerHTML=`<div class="empty">Error: ${e.message}</div>`;});
     document.getElementById('dot').className='dot red';
     document.getElementById('conn-text').textContent='Error';
   }
 }
-
 function num(v){return parseFloat(String(v||0).replace(',','.'))||0;}
 function fmtEur(v){return Math.round(v).toLocaleString('es-ES')+'€';}
 function fmtNum(v){return Math.round(v).toLocaleString('es-ES');}
-
 function getWeekRange(offset){
-  const now=new Date();
-  const day=now.getDay()||7;
+  const now=new Date();const day=now.getDay()||7;
   const mon=new Date(now);mon.setDate(now.getDate()-day+1+offset*7);
   const sun=new Date(mon);sun.setDate(mon.getDate()+6);
   return{start:mon,end:sun};
 }
-
 function parseDate(str){
   if(!str)return null;
   const parts=str.split(' ')[0].split('/');
@@ -245,7 +284,6 @@ function parseDate(str){
   }
   return new Date(str);
 }
-
 function ventasRows(){
   return DATA.ventas.filter(r=>r.fecha_hora&&r.producto&&r.cantidad&&r.producto!='_formato_ok'&&r.producto!='_meta');
 }
@@ -254,123 +292,57 @@ function renderResumen(){
   const el=document.getElementById('tab-resumen');
   const vrows=ventasRows();
   const mrows=DATA.merma.filter(r=>r.fecha_hora&&r.producto);
-  const today=new Date().toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit',year:'numeric'});
-  
-  const vHoy=vrows.filter(r=>r.fecha_hora&&r.fecha_hora.startsWith(today.split('/').reverse().join('/')||today));
-  const impHoy=vHoy.reduce((s,r)=>s+num(r.importe),0);
-  const udsHoy=vHoy.reduce((s,r)=>s+num(r.cantidad),0);
-
   const w0=getWeekRange(0);const w1=getWeekRange(-1);
   const vW0=vrows.filter(r=>{const d=parseDate(r.fecha_hora);return d&&d>=w0.start&&d<=w0.end;});
   const vW1=vrows.filter(r=>{const d=parseDate(r.fecha_hora);return d&&d>=w1.start&&d<=w1.end;});
   const impW0=vW0.reduce((s,r)=>s+num(r.importe),0);
   const impW1=vW1.reduce((s,r)=>s+num(r.importe),0);
+  const udsW0=vW0.reduce((s,r)=>s+num(r.cantidad),0);
   const deltaW=impW1>0?((impW0-impW1)/impW1*100):0;
   const totalImp=vrows.reduce((s,r)=>s+num(r.importe),0);
   const totalMerma=mrows.reduce((s,r)=>s+num(r.cantidad),0);
-
-  // Ventas por día (últimos 14 días)
   const byDay={};
-  vrows.forEach(r=>{
-    const d=parseDate(r.fecha_hora);
-    if(!d)return;
-    const k=d.toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit'});
-    byDay[k]=(byDay[k]||0)+num(r.importe);
-  });
+  vrows.forEach(r=>{const d=parseDate(r.fecha_hora);if(!d)return;const k=d.toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit'});byDay[k]=(byDay[k]||0)+num(r.importe);});
   const dias=Object.keys(byDay).slice(-14);
-  const impDias=dias.map(d=>Math.round(byDay[d]));
-
-  // Top 5 productos
-  const byP={};
-  vrows.forEach(r=>{const p=r.producto||'—';if(!byP[p])byP[p]=0;byP[p]+=num(r.importe);});
+  const byP={};vrows.forEach(r=>{const p=r.producto||'—';if(!byP[p])byP[p]=0;byP[p]+=num(r.importe);});
   const top5=Object.entries(byP).sort((a,b)=>b[1]-a[1]).slice(0,5);
-
-  el.innerHTML=`
-    <div class="day-summary">
-      <h3>Resumen del día — ${new Date().toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long'})}</h3>
-      <div class="day-metrics">
-        <div class="day-metric"><div class="label">Ventas hoy</div><div class="val">${fmtEur(impHoy)}</div></div>
-        <div class="day-metric"><div class="label">Unidades hoy</div><div class="val">${fmtNum(udsHoy)}</div></div>
-        <div class="day-metric"><div class="label">Semana actual</div><div class="val">${fmtEur(impW0)}</div></div>
-        <div class="day-metric"><div class="label">Semana anterior</div><div class="val">${fmtEur(impW1)}</div></div>
-      </div>
-    </div>
-    <div class="metrics">
-      <div class="metric">
-        <div class="metric-label">Importe total acumulado</div>
-        <div class="metric-value">${fmtEur(totalImp)}</div>
-        <div class="metric-delta ${deltaW>=0?'up':'down'}">${deltaW>=0?'+':''}${deltaW.toFixed(1)}% vs semana anterior</div>
-      </div>
-      <div class="metric">
-        <div class="metric-label">Líneas de ventas</div>
-        <div class="metric-value">${vrows.length}</div>
-        <div class="metric-sub">registros totales</div>
-      </div>
-      <div class="metric">
-        <div class="metric-label">Merma total</div>
-        <div class="metric-value">${fmtNum(totalMerma)}</div>
-        <div class="metric-sub">unidades retiradas</div>
-      </div>
-      <div class="metric">
-        <div class="metric-label">Productos en STOCK</div>
-        <div class="metric-value">${new Set(DATA.stock.filter(r=>r.producto).map(r=>r.producto)).size}</div>
-        <div class="metric-sub">referencias</div>
-      </div>
-    </div>
-    <div class="grid-2">
-      <div class="chart-card">
-        <div class="section-title">Ventas por día (€)</div>
-        <div class="chart-wrap" style="height:200px"><canvas id="cv-dias" role="img" aria-label="Ventas por día"></canvas></div>
-      </div>
-      <div class="chart-card">
-        <div class="section-title">Top 5 productos</div>
-        <div class="chart-wrap" style="height:200px"><canvas id="cv-top" role="img" aria-label="Top productos por importe"></canvas></div>
-      </div>
-    </div>
-    <div class="grid-2">
-      <div>
-        <div class="section-title">Semana actual vs anterior</div>
-        <div class="chart-card">
-          <div class="chart-wrap" style="height:180px"><canvas id="cv-semanas" role="img" aria-label="Comparativa semanas"></canvas></div>
-        </div>
-      </div>
-      <div>
-        <div class="section-title">Últimas ventas</div>
-        <div class="table-wrap"><table>
-          <thead><tr><th>Fecha</th><th>Producto</th><th style="text-align:right">Importe</th></tr></thead>
-          <tbody>${vrows.slice(-8).reverse().map(r=>`<tr>
-            <td>${r.fecha_hora||'—'}</td>
-            <td>${(r.producto||'').replace(/_/g,' ')}</td>
-            <td style="text-align:right">${r.importe?num(r.importe).toFixed(2)+'€':'—'}</td>
-          </tr>`).join('')}</tbody>
-        </table></div>
-      </div>
-    </div>`;
-
-  charts['dias']=new Chart(document.getElementById('cv-dias'),{
-    type:'bar',
-    data:{labels:dias,datasets:[{label:'€',data:impDias,backgroundColor:'#378ADD',borderRadius:4}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:10},maxRotation:45}},y:{grid:{color:'rgba(0,0,0,0.05)'},ticks:{font:{size:10}}}}}
-  });
-  charts['top']=new Chart(document.getElementById('cv-top'),{
-    type:'doughnut',
-    data:{labels:top5.map(([p])=>p.replace(/_/g,' ')),datasets:[{data:top5.map(([,v])=>Math.round(v)),backgroundColor:['#378ADD','#1D9E75','#D85A30','#BA7517','#534AB7'],borderWidth:0}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:11},boxWidth:10}}}}
-  });
-
-  // Comparativa semanas por día
   const dows=['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
   const dataW0=Array(7).fill(0);const dataW1=Array(7).fill(0);
   vW0.forEach(r=>{const d=parseDate(r.fecha_hora);if(d){const i=(d.getDay()||7)-1;dataW0[i]+=num(r.importe);}});
   vW1.forEach(r=>{const d=parseDate(r.fecha_hora);if(d){const i=(d.getDay()||7)-1;dataW1[i]+=num(r.importe);}});
-  charts['semanas']=new Chart(document.getElementById('cv-semanas'),{
-    type:'line',
-    data:{labels:dows,datasets:[
-      {label:'Esta semana',data:dataW0.map(v=>Math.round(v)),borderColor:'#378ADD',backgroundColor:'rgba(55,138,221,0.1)',tension:0.3,fill:true,borderWidth:2,pointRadius:3},
-      {label:'Semana anterior',data:dataW1.map(v=>Math.round(v)),borderColor:'#aaa',backgroundColor:'transparent',tension:0.3,borderDash:[4,4],borderWidth:2,pointRadius:3}
-    ]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{size:11},boxWidth:10}}},scales:{x:{grid:{display:false},ticks:{font:{size:10}}},y:{grid:{color:'rgba(0,0,0,0.05)'},ticks:{font:{size:10}}}}}
-  });
+
+  el.innerHTML=`
+    <div class="day-summary">
+      <h3>Resumen — ${new Date().toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long'})}</h3>
+      <div class="day-metrics">
+        <div class="day-metric"><div class="label">Semana actual</div><div class="val">${fmtEur(impW0)}</div></div>
+        <div class="day-metric"><div class="label">Unidades semana</div><div class="val">${fmtNum(udsW0)}</div></div>
+        <div class="day-metric"><div class="label">Semana anterior</div><div class="val">${fmtEur(impW1)}</div></div>
+        <div class="day-metric"><div class="label">Variación</div><div class="val" style="color:${deltaW>=0?'#2ecc71':'#e74c3c'}">${deltaW>=0?'+':''}${deltaW.toFixed(1)}%</div></div>
+      </div>
+    </div>
+    <div class="metrics">
+      <div class="metric"><div class="metric-label">Importe total acumulado</div><div class="metric-value">${fmtEur(totalImp)}</div><div class="metric-delta ${deltaW>=0?'up':'down'}">${deltaW>=0?'+':''}${deltaW.toFixed(1)}% vs semana ant.</div></div>
+      <div class="metric"><div class="metric-label">Líneas de ventas</div><div class="metric-value">${vrows.length}</div><div class="metric-sub">registros totales</div></div>
+      <div class="metric"><div class="metric-label">Merma total</div><div class="metric-value">${fmtNum(totalMerma)}</div><div class="metric-sub">unidades retiradas</div></div>
+      <div class="metric"><div class="metric-label">Referencias en stock</div><div class="metric-value">${new Set(DATA.stock.filter(r=>r.producto).map(r=>r.producto)).size}</div></div>
+    </div>
+    <div class="grid-2">
+      <div class="chart-card"><div class="section-title">Ventas por día (€) — últimas 2 semanas</div><div class="chart-wrap" style="height:200px"><canvas id="cv-dias" role="img" aria-label="Ventas por día"></canvas></div></div>
+      <div class="chart-card"><div class="section-title">Top 5 productos</div><div class="chart-wrap" style="height:200px"><canvas id="cv-top" role="img" aria-label="Top productos"></canvas></div></div>
+    </div>
+    <div class="grid-2">
+      <div class="chart-card"><div class="section-title">Semana actual vs anterior</div><div class="chart-wrap" style="height:180px"><canvas id="cv-sem" role="img" aria-label="Comparativa semanas"></canvas></div></div>
+      <div>
+        <div class="section-title">Últimas ventas</div>
+        <div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Producto</th><th style="text-align:right">Importe</th></tr></thead>
+        <tbody>${vrows.slice(-8).reverse().map(r=>`<tr><td>${r.fecha_hora||'—'}</td><td>${(r.producto||'').replace(/_/g,' ')}</td><td style="text-align:right">${r.importe?num(r.importe).toFixed(2)+'€':'—'}</td></tr>`).join('')}</tbody></table></div>
+      </div>
+    </div>`;
+
+  charts['dias']=new Chart(document.getElementById('cv-dias'),{type:'bar',data:{labels:dias,datasets:[{label:'€',data:dias.map(d=>Math.round(byDay[d]||0)),backgroundColor:'#378ADD',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:10},maxRotation:45}},y:{grid:{color:'rgba(0,0,0,0.05)'},ticks:{font:{size:10}}}}}});
+  charts['top']=new Chart(document.getElementById('cv-top'),{type:'doughnut',data:{labels:top5.map(([p])=>p.replace(/_/g,' ')),datasets:[{data:top5.map(([,v])=>Math.round(v)),backgroundColor:['#378ADD','#1D9E75','#D85A30','#BA7517','#534AB7'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:10},boxWidth:10}}}}});
+  charts['sem']=new Chart(document.getElementById('cv-sem'),{type:'line',data:{labels:dows,datasets:[{label:'Esta semana',data:dataW0.map(v=>Math.round(v)),borderColor:'#378ADD',backgroundColor:'rgba(55,138,221,0.1)',tension:0.3,fill:true,borderWidth:2,pointRadius:3},{label:'Semana anterior',data:dataW1.map(v=>Math.round(v)),borderColor:'#aaa',backgroundColor:'transparent',tension:0.3,borderDash:[4,4],borderWidth:2,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{size:10},boxWidth:10}}},scales:{x:{grid:{display:false},ticks:{font:{size:10}}},y:{grid:{color:'rgba(0,0,0,0.05)'},ticks:{font:{size:10}}}}}});
 }
 
 function renderVentas(){
@@ -378,67 +350,35 @@ function renderVentas(){
   const rows=ventasRows();
   const totalImp=rows.reduce((s,r)=>s+num(r.importe),0);
   const totalUds=rows.reduce((s,r)=>s+num(r.cantidad),0);
-  const byP={};
-  rows.forEach(r=>{const p=r.producto||'—';if(!byP[p])byP[p]={uds:0,imp:0};byP[p].uds+=num(r.cantidad);byP[p].imp+=num(r.importe);});
+  const byP={};rows.forEach(r=>{const p=r.producto||'—';if(!byP[p])byP[p]={uds:0,imp:0};byP[p].uds+=num(r.cantidad);byP[p].imp+=num(r.importe);});
   const top=Object.entries(byP).sort((a,b)=>b[1].imp-a[1].imp).slice(0,10);
-  const chartH=Math.max(200,top.length*40+80);
-
-  // Ventas por día
-  const byDay={};
-  rows.forEach(r=>{
-    const d=parseDate(r.fecha_hora);if(!d)return;
-    const k=d.toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit'});
-    byDay[k]=(byDay[k]||0)+num(r.importe);
-  });
+  const byDay={};rows.forEach(r=>{const d=parseDate(r.fecha_hora);if(!d)return;const k=d.toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit'});byDay[k]=(byDay[k]||0)+num(r.importe);});
   const dias=Object.keys(byDay).slice(-30);
-
+  const chartH=Math.max(200,top.length*40+80);
   el.innerHTML=`
     <div class="metrics">
       <div class="metric"><div class="metric-label">Importe total</div><div class="metric-value">${fmtEur(totalImp)}</div></div>
-      <div class="metric"><div class="metric-label">Unidades vendidas</div><div class="metric-value">${fmtNum(totalUds)}</div></div>
+      <div class="metric"><div class="metric-label">Unidades</div><div class="metric-value">${fmtNum(totalUds)}</div></div>
       <div class="metric"><div class="metric-label">Líneas</div><div class="metric-value">${rows.length}</div></div>
-      <div class="metric"><div class="metric-label">Productos distintos</div><div class="metric-value">${Object.keys(byP).length}</div></div>
+      <div class="metric"><div class="metric-label">Productos</div><div class="metric-value">${Object.keys(byP).length}</div></div>
     </div>
-    <div class="chart-card">
-      <div class="section-title">Ventas diarias (€) — últimos 30 días</div>
-      <div class="chart-wrap" style="height:220px"><canvas id="cv-vd" role="img" aria-label="Ventas por día"></canvas></div>
-    </div>
+    <div class="chart-card"><div class="section-title">Ventas diarias (€) — últimos 30 días</div><div class="chart-wrap" style="height:220px"><canvas id="cv-vd" role="img" aria-label="Ventas por día"></canvas></div></div>
     <div class="grid-2">
-      <div class="chart-card">
-        <div class="section-title">Top productos por importe</div>
-        <div class="chart-wrap" style="height:${chartH}px"><canvas id="cv-vp" role="img" aria-label="Top productos"></canvas></div>
-      </div>
-      <div class="chart-card">
-        <div class="section-title">Distribución por producto (%)</div>
-        <div class="chart-wrap" style="height:${chartH}px"><canvas id="cv-vd2" role="img" aria-label="Distribución"></canvas></div>
-      </div>
+      <div class="chart-card"><div class="section-title">Top productos por importe</div><div class="chart-wrap" style="height:${chartH}px"><canvas id="cv-vp" role="img" aria-label="Top productos"></canvas></div></div>
+      <div class="chart-card"><div class="section-title">Distribución (%)</div><div class="chart-wrap" style="height:${chartH}px"><canvas id="cv-vd2" role="img" aria-label="Distribución"></canvas></div></div>
     </div>
     <div class="filter-bar">
       <input type="text" id="v-q" placeholder="Buscar producto..." oninput="fVentas()" style="flex:1;min-width:150px">
       <input type="date" id="v-from" onchange="fVentas()">
+      <span style="font-size:13px;color:#888">a</span>
       <input type="date" id="v-to" onchange="fVentas()">
+      <button class="btn btn-sm" onclick="exportCSV('ventas')">Exportar CSV</button>
     </div>
-    <div class="table-wrap"><table>
-      <thead><tr><th>Fecha</th><th>Producto</th><th style="text-align:right">Cant.</th><th style="text-align:right">Importe</th></tr></thead>
-      <tbody id="v-body"></tbody>
-    </table></div>`;
-
-  charts['vd']=new Chart(document.getElementById('cv-vd'),{
-    type:'bar',
-    data:{labels:dias,datasets:[{label:'€',data:dias.map(d=>Math.round(byDay[d]||0)),backgroundColor:'#378ADD',borderRadius:3}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:10},maxRotation:45,autoSkip:true,maxTicksLimit:15}},y:{grid:{color:'rgba(0,0,0,0.05)'},ticks:{font:{size:10}}}}}
-  });
-  charts['vp']=new Chart(document.getElementById('cv-vp'),{
-    type:'bar',
-    data:{labels:top.map(([p])=>p.replace(/_/g,' ')),datasets:[{label:'€',data:top.map(([,v])=>Math.round(v.imp)),backgroundColor:'#1D9E75',borderRadius:4}]},
-    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(0,0,0,0.05)'}},y:{grid:{display:false},ticks:{font:{size:11}}}}}
-  });
+    <div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Producto</th><th style="text-align:right">Cant.</th><th style="text-align:right">Importe</th></tr></thead><tbody id="v-body"></tbody></table></div>`;
+  charts['vd']=new Chart(document.getElementById('cv-vd'),{type:'bar',data:{labels:dias,datasets:[{label:'€',data:dias.map(d=>Math.round(byDay[d]||0)),backgroundColor:'#378ADD',borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:10},maxRotation:45,autoSkip:true,maxTicksLimit:15}},y:{grid:{color:'rgba(0,0,0,0.05)'},ticks:{font:{size:10}}}}}});
+  charts['vp']=new Chart(document.getElementById('cv-vp'),{type:'bar',data:{labels:top.map(([p])=>p.replace(/_/g,' ')),datasets:[{label:'€',data:top.map(([,v])=>Math.round(v.imp)),backgroundColor:'#1D9E75',borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(0,0,0,0.05)'}},y:{grid:{display:false},ticks:{font:{size:11}}}}}});
   const top6=top.slice(0,6);
-  charts['vd2']=new Chart(document.getElementById('cv-vd2'),{
-    type:'doughnut',
-    data:{labels:top6.map(([p])=>p.replace(/_/g,' ')),datasets:[{data:top6.map(([,v])=>Math.round(v.imp)),backgroundColor:['#378ADD','#1D9E75','#D85A30','#BA7517','#534AB7','#D4537E'],borderWidth:0}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:10},boxWidth:10}}}}
-  });
+  charts['vd2']=new Chart(document.getElementById('cv-vd2'),{type:'doughnut',data:{labels:top6.map(([p])=>p.replace(/_/g,' ')),datasets:[{data:top6.map(([,v])=>Math.round(v.imp)),backgroundColor:['#378ADD','#1D9E75','#D85A30','#BA7517','#534AB7','#D4537E'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:10},boxWidth:10}}}}});
   fVentas();
 }
 function fVentas(){
@@ -450,11 +390,7 @@ function fVentas(){
     if(from||to){const d=parseDate(r.fecha_hora);if(!d)return false;if(from&&d<new Date(from))return false;if(to&&d>new Date(to+'T23:59'))return false;}
     return true;
   }).slice(-500).reverse();
-  document.getElementById('v-body').innerHTML=rows.length?rows.map(r=>`<tr>
-    <td>${r.fecha_hora||'—'}</td><td>${(r.producto||'').replace(/_/g,' ')}</td>
-    <td style="text-align:right">${r.cantidad||0}</td>
-    <td style="text-align:right">${r.importe?num(r.importe).toFixed(2)+'€':'—'}</td>
-  </tr>`).join(''):'<tr><td colspan="4" class="empty">Sin resultados</td></tr>';
+  document.getElementById('v-body').innerHTML=rows.length?rows.map(r=>`<tr><td>${r.fecha_hora||'—'}</td><td>${(r.producto||'').replace(/_/g,' ')}</td><td style="text-align:right">${r.cantidad||0}</td><td style="text-align:right">${r.importe?num(r.importe).toFixed(2)+'€':'—'}</td></tr>`).join(''):'<tr><td colspan="4" class="empty">Sin resultados</td></tr>';
 }
 
 function renderStock(){
@@ -463,41 +399,23 @@ function renderStock(){
   const enc=rows.filter(r=>r._tipo==='encargo').reduce((s,r)=>s+num(r.cantidad),0);
   const sob=rows.filter(r=>r._tipo==='sobrante').reduce((s,r)=>s+num(r.cantidad),0);
   const prods=new Set(rows.map(r=>r.producto)).size;
-
-  const byP={};
-  rows.filter(r=>r._tipo==='sobrante').forEach(r=>{
-    const p=r.producto||'—';
-    byP[p]=(byP[p]||0)+num(r.cantidad);
-  });
+  const byP={};rows.filter(r=>r._tipo==='sobrante').forEach(r=>{const p=r.producto||'—';byP[p]=(byP[p]||0)+num(r.cantidad);});
   const topSob=Object.entries(byP).sort((a,b)=>b[1]-a[1]).slice(0,10);
-
   el.innerHTML=`
     <div class="metrics">
       <div class="metric"><div class="metric-label">Productos distintos</div><div class="metric-value">${prods}</div></div>
-      <div class="metric"><div class="metric-label">Total encargos</div><div class="metric-value">${fmtNum(enc)}</div><div class="metric-sub">unidades recibidas</div></div>
-      <div class="metric"><div class="metric-label">Total sobrantes</div><div class="metric-value">${fmtNum(sob)}</div><div class="metric-sub">unidades sobrantes</div></div>
+      <div class="metric"><div class="metric-label">Total encargos</div><div class="metric-value">${fmtNum(enc)}</div><div class="metric-sub">unidades</div></div>
+      <div class="metric"><div class="metric-label">Total sobrantes</div><div class="metric-value">${fmtNum(sob)}</div><div class="metric-sub">unidades</div></div>
       <div class="metric"><div class="metric-label">Registros</div><div class="metric-value">${rows.length}</div></div>
     </div>
-    <div class="chart-card">
-      <div class="section-title">Top sobrantes por producto</div>
-      <div class="chart-wrap" style="height:${Math.max(180,topSob.length*36+60)}px"><canvas id="cv-sob" role="img" aria-label="Top sobrantes"></canvas></div>
-    </div>
+    <div class="chart-card"><div class="section-title">Top sobrantes por producto</div><div class="chart-wrap" style="height:${Math.max(180,topSob.length*36+60)}px"><canvas id="cv-sob" role="img" aria-label="Sobrantes"></canvas></div></div>
     <div class="filter-bar">
       <input type="text" id="s-q" placeholder="Buscar producto..." oninput="fStock()" style="flex:1;min-width:150px">
-      <select id="s-tipo" onchange="fStock()">
-        <option value="">Todos</option><option value="encargo">Encargo</option><option value="sobrante">Sobrante</option>
-      </select>
+      <select id="s-tipo" onchange="fStock()"><option value="">Todos</option><option value="encargo">Encargo</option><option value="sobrante">Sobrante</option></select>
+      <button class="btn btn-sm" onclick="exportCSV('stock')">Exportar CSV</button>
     </div>
-    <div class="table-wrap"><table>
-      <thead><tr><th>Fecha</th><th>Parada</th><th>Producto</th><th style="text-align:right">Cant.</th><th>Tipo</th></tr></thead>
-      <tbody id="s-body"></tbody>
-    </table></div>`;
-
-  charts['sob']=new Chart(document.getElementById('cv-sob'),{
-    type:'bar',
-    data:{labels:topSob.map(([p])=>p.replace(/_/g,' ')),datasets:[{label:'Uds',data:topSob.map(([,v])=>Math.round(v)),backgroundColor:'#f39c12',borderRadius:4}]},
-    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(0,0,0,0.05)'}},y:{grid:{display:false},ticks:{font:{size:11}}}}}
-  });
+    <div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Parada</th><th>Producto</th><th style="text-align:right">Cant.</th><th>Tipo</th></tr></thead><tbody id="s-body"></tbody></table></div>`;
+  charts['sob']=new Chart(document.getElementById('cv-sob'),{type:'bar',data:{labels:topSob.map(([p])=>p.replace(/_/g,' ')),datasets:[{label:'Uds',data:topSob.map(([,v])=>Math.round(v)),backgroundColor:'#f39c12',borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(0,0,0,0.05)'}},y:{grid:{display:false},ticks:{font:{size:11}}}}}});
   fStock();
 }
 function fStock(){
@@ -509,12 +427,7 @@ function fStock(){
     if(q&&!r.producto.toLowerCase().includes(q))return false;
     return true;
   }).slice(-400).reverse();
-  document.getElementById('s-body').innerHTML=rows.length?rows.map(r=>`<tr>
-    <td>${r.fecha_hora||'—'}</td><td>${(r.parada||'').replace(/_/g,' ')}</td>
-    <td>${(r.producto||'').replace(/_/g,' ')}</td>
-    <td style="text-align:right">${r.cantidad||0}</td>
-    <td><span class="badge b-${r._tipo==='encargo'?'encargo':'sobrante'}">${r._tipo||'—'}</span></td>
-  </tr>`).join(''):'<tr><td colspan="5" class="empty">Sin resultados</td></tr>';
+  document.getElementById('s-body').innerHTML=rows.length?rows.map(r=>`<tr><td>${r.fecha_hora||'—'}</td><td>${(r.parada||'').replace(/_/g,' ')}</td><td>${(r.producto||'').replace(/_/g,' ')}</td><td style="text-align:right">${r.cantidad||0}</td><td><span class="badge b-${r._tipo==='encargo'?'encargo':'sobrante'}">${r._tipo||'—'}</span></td></tr>`).join(''):'<tr><td colspan="5" class="empty">Sin resultados</td></tr>';
 }
 
 function renderMerma(){
@@ -523,62 +436,39 @@ function renderMerma(){
   const total=rows.reduce((s,r)=>s+num(r.cantidad),0);
   const byP={};rows.forEach(r=>{const p=r.producto||'—';byP[p]=(byP[p]||0)+num(r.cantidad);});
   const topM=Object.entries(byP).sort((a,b)=>b[1]-a[1]).slice(0,8);
-
-  // Ratio merma vs ventas
   const totalVUds=ventasRows().reduce((s,r)=>s+num(r.cantidad),0);
   const ratio=totalVUds>0?(total/totalVUds*100):0;
-
   el.innerHTML=`
     <div class="metrics">
       <div class="metric"><div class="metric-label">Total merma</div><div class="metric-value">${fmtNum(total)}</div><div class="metric-sub">unidades</div></div>
       <div class="metric"><div class="metric-label">Productos afectados</div><div class="metric-value">${Object.keys(byP).length}</div></div>
-      <div class="metric"><div class="metric-label">Ratio merma/ventas</div><div class="metric-value">${ratio.toFixed(1)}%</div><div class="metric-sub ${ratio>5?'metric-delta down':'metric-delta neutral'}">${ratio>5?'⚠ Por encima del 5%':'Dentro del umbral'}</div></div>
+      <div class="metric"><div class="metric-label">Ratio merma/ventas</div><div class="metric-value">${ratio.toFixed(1)}%</div><div class="metric-delta ${ratio>5?'down':'neutral'}">${ratio>5?'Por encima del 5%':'Dentro del umbral'}</div></div>
       <div class="metric"><div class="metric-label">Registros</div><div class="metric-value">${rows.length}</div></div>
     </div>
-    <div class="chart-card">
-      <div class="section-title">Merma por producto (unidades)</div>
-      <div class="chart-wrap" style="height:${Math.max(180,topM.length*36+60)}px"><canvas id="cv-m" role="img" aria-label="Merma por producto"></canvas></div>
-    </div>
+    <div class="chart-card"><div class="section-title">Merma por producto (unidades)</div><div class="chart-wrap" style="height:${Math.max(180,topM.length*36+60)}px"><canvas id="cv-m" role="img" aria-label="Merma por producto"></canvas></div></div>
     <div class="filter-bar">
       <input type="text" id="m-q" placeholder="Buscar producto..." oninput="fMerma()" style="flex:1;min-width:150px">
+      <button class="btn btn-sm" onclick="exportCSV('merma')">Exportar CSV</button>
     </div>
-    <div class="table-wrap"><table>
-      <thead><tr><th>Fecha</th><th>Parada</th><th>Producto</th><th style="text-align:right">Cant.</th><th>Motivo</th></tr></thead>
-      <tbody id="m-body"></tbody>
-    </table></div>`;
-
-  charts['m']=new Chart(document.getElementById('cv-m'),{
-    type:'bar',
-    data:{labels:topM.map(([p])=>p.replace(/_/g,' ')),datasets:[{label:'Uds',data:topM.map(([,v])=>Math.round(v)),backgroundColor:'#e74c3c',borderRadius:4}]},
-    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(0,0,0,0.05)'}},y:{grid:{display:false},ticks:{font:{size:11}}}}}
-  });
+    <div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Parada</th><th>Producto</th><th style="text-align:right">Cant.</th><th>Motivo</th></tr></thead><tbody id="m-body"></tbody></table></div>`;
+  charts['m']=new Chart(document.getElementById('cv-m'),{type:'bar',data:{labels:topM.map(([p])=>p.replace(/_/g,' ')),datasets:[{label:'Uds',data:topM.map(([,v])=>Math.round(v)),backgroundColor:'#e74c3c',borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(0,0,0,0.05)'}},y:{grid:{display:false},ticks:{font:{size:11}}}}}});
   fMerma();
 }
 function fMerma(){
   const q=(document.getElementById('m-q').value||'').toLowerCase();
   const rows=DATA.merma.filter(r=>r.fecha_hora&&r.producto&&(!q||r.producto.toLowerCase().includes(q))).slice(-400).reverse();
-  document.getElementById('m-body').innerHTML=rows.length?rows.map(r=>`<tr>
-    <td>${r.fecha_hora||'—'}</td><td>${(r.parada||'').replace(/_/g,' ')}</td>
-    <td>${(r.producto||'').replace(/_/g,' ')}</td>
-    <td style="text-align:right">${r.cantidad||0}</td>
-    <td>${r.motivo||'—'}</td>
-  </tr>`).join(''):'<tr><td colspan="5" class="empty">Sin resultados</td></tr>';
+  document.getElementById('m-body').innerHTML=rows.length?rows.map(r=>`<tr><td>${r.fecha_hora||'—'}</td><td>${(r.parada||'').replace(/_/g,' ')}</td><td>${(r.producto||'').replace(/_/g,' ')}</td><td style="text-align:right">${r.cantidad||0}</td><td>${r.motivo||'—'}</td></tr>`).join(''):'<tr><td colspan="5" class="empty">Sin resultados</td></tr>';
 }
 
 function renderAlbaranes(){
   const el=document.getElementById('tab-albaranes');
-  if(!DATA.albaranes||!DATA.albaranes.length){
-    el.innerHTML='<div class="empty">No hay datos en la pestaña ALBARANES todavía.</div>';return;
-  }
+  if(!DATA.albaranes||!DATA.albaranes.length){el.innerHTML='<div class="empty">No hay datos en ALBARANES todavía.</div>';return;}
   const rows=DATA.albaranes;
   const totalDoc=new Set(rows.map(r=>r.numero_doc)).size;
   const totalImp=rows.reduce((s,r)=>s+num(r.total_linea),0);
   const proveedores=new Set(rows.map(r=>r.proveedor)).size;
-
-  const byProv={};
-  rows.forEach(r=>{const p=r.proveedor||'—';byProv[p]=(byProv[p]||0)+num(r.total_linea);});
+  const byProv={};rows.forEach(r=>{const p=r.proveedor||'—';byProv[p]=(byProv[p]||0)+num(r.total_linea);});
   const topProv=Object.entries(byProv).sort((a,b)=>b[1]-a[1]).slice(0,6);
-
   el.innerHTML=`
     <div class="metrics">
       <div class="metric"><div class="metric-label">Documentos</div><div class="metric-value">${totalDoc}</div></div>
@@ -586,24 +476,14 @@ function renderAlbaranes(){
       <div class="metric"><div class="metric-label">Importe total</div><div class="metric-value">${fmtEur(totalImp)}</div></div>
       <div class="metric"><div class="metric-label">Líneas</div><div class="metric-value">${rows.length}</div></div>
     </div>
-    <div class="chart-card">
-      <div class="section-title">Gasto por proveedor (€)</div>
-      <div class="chart-wrap" style="height:${Math.max(160,topProv.length*36+60)}px"><canvas id="cv-alb" role="img" aria-label="Gasto por proveedor"></canvas></div>
-    </div>
+    <div class="chart-card"><div class="section-title">Gasto por proveedor (€)</div><div class="chart-wrap" style="height:${Math.max(160,topProv.length*36+60)}px"><canvas id="cv-alb" role="img" aria-label="Gasto proveedor"></canvas></div></div>
     <div class="filter-bar">
-      <input type="text" id="a-q" placeholder="Buscar proveedor o producto..." oninput="fAlb()" style="flex:1;min-width:150px">
+      <input type="text" id="a-q" placeholder="Buscar..." oninput="fAlb()" style="flex:1;min-width:150px">
       <select id="a-prov" onchange="fAlb()"><option value="">Todos los proveedores</option>${[...new Set(rows.map(r=>r.proveedor).filter(Boolean))].sort().map(p=>`<option value="${p}">${p}</option>`).join('')}</select>
+      <button class="btn btn-sm" onclick="exportCSV('albaranes')">Exportar CSV</button>
     </div>
-    <div class="table-wrap"><table>
-      <thead><tr><th>Fecha</th><th>Proveedor</th><th>Producto</th><th style="text-align:right">Cant.</th><th>Unidad</th><th style="text-align:right">Precio/ud</th><th style="text-align:right">Total línea</th></tr></thead>
-      <tbody id="a-body"></tbody>
-    </table></div>`;
-
-  charts['alb']=new Chart(document.getElementById('cv-alb'),{
-    type:'bar',
-    data:{labels:topProv.map(([p])=>p),datasets:[{label:'€',data:topProv.map(([,v])=>Math.round(v)),backgroundColor:'#534AB7',borderRadius:4}]},
-    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(0,0,0,0.05)'}},y:{grid:{display:false},ticks:{font:{size:11}}}}}
-  });
+    <div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Proveedor</th><th>Producto</th><th style="text-align:right">Cant.</th><th>Unidad</th><th style="text-align:right">Precio/ud</th><th style="text-align:right">Total</th></tr></thead><tbody id="a-body"></tbody></table></div>`;
+  charts['alb']=new Chart(document.getElementById('cv-alb'),{type:'bar',data:{labels:topProv.map(([p])=>p),datasets:[{label:'€',data:topProv.map(([,v])=>Math.round(v)),backgroundColor:'#534AB7',borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(0,0,0,0.05)'}},y:{grid:{display:false},ticks:{font:{size:11}}}}}});
   fAlb();
 }
 function fAlb(){
@@ -614,15 +494,7 @@ function fAlb(){
     if(q&&!(r.proveedor||'').toLowerCase().includes(q)&&!(r.producto||'').toLowerCase().includes(q))return false;
     return true;
   }).slice(-500).reverse();
-  document.getElementById('a-body').innerHTML=rows.length?rows.map(r=>`<tr>
-    <td>${r.fecha_registro||r.fecha_doc||'—'}</td>
-    <td>${r.proveedor||'—'}</td>
-    <td>${(r.producto||'—').replace(/_/g,' ')}</td>
-    <td style="text-align:right">${r.cantidad||0}</td>
-    <td>${r.unidad||'—'}</td>
-    <td style="text-align:right">${r.precio_ud?num(r.precio_ud).toFixed(2)+'€':'—'}</td>
-    <td style="text-align:right">${r.total_linea?num(r.total_linea).toFixed(2)+'€':'—'}</td>
-  </tr>`).join(''):'<tr><td colspan="7" class="empty">Sin resultados</td></tr>';
+  document.getElementById('a-body').innerHTML=rows.length?rows.map(r=>`<tr><td>${r.fecha_registro||r.fecha_doc||'—'}</td><td>${r.proveedor||'—'}</td><td>${(r.producto||'—').replace(/_/g,' ')}</td><td style="text-align:right">${r.cantidad||0}</td><td>${r.unidad||'—'}</td><td style="text-align:right">${r.precio_ud?num(r.precio_ud).toFixed(2)+'€':'—'}</td><td style="text-align:right">${r.total_linea?num(r.total_linea).toFixed(2)+'€':'—'}</td></tr>`).join(''):'<tr><td colspan="7" class="empty">Sin resultados</td></tr>';
 }
 
 function renderAlertas(){
@@ -635,68 +507,241 @@ function renderAlertas(){
   const ratio=totalVUds>0?(totalMerma/totalVUds*100):0;
   if(ratio>5)alertas.push({type:'red',icon:'⚠',title:'Merma elevada',desc:`Ratio merma/ventas: ${ratio.toFixed(1)}% (umbral: 5%)`});
   else alertas.push({type:'green',icon:'✓',title:'Merma bajo control',desc:`Ratio actual: ${ratio.toFixed(1)}% (umbral: 5%)`});
-
-  // Productos con alta merma
   const byPM={};mrows.forEach(r=>{const p=r.producto||'—';byPM[p]=(byPM[p]||0)+num(r.cantidad);});
   const topMerma=Object.entries(byPM).sort((a,b)=>b[1]-a[1]).slice(0,3);
   if(topMerma.length)alertas.push({type:'yellow',icon:'📦',title:'Productos con más merma',desc:topMerma.map(([p,v])=>`${p.replace(/_/g,' ')}: ${Math.round(v)} uds`).join(' · ')});
-
-  // Semana actual vs anterior
   const w0=getWeekRange(0);const w1=getWeekRange(-1);
   const impW0=vrows.filter(r=>{const d=parseDate(r.fecha_hora);return d&&d>=w0.start&&d<=w0.end;}).reduce((s,r)=>s+num(r.importe),0);
   const impW1=vrows.filter(r=>{const d=parseDate(r.fecha_hora);return d&&d>=w1.start&&d<=w1.end;}).reduce((s,r)=>s+num(r.importe),0);
   const deltaW=impW1>0?((impW0-impW1)/impW1*100):0;
-  if(deltaW<-10)alertas.push({type:'red',icon:'📉',title:'Ventas a la baja esta semana',desc:`${deltaW.toFixed(1)}% vs semana anterior (${fmtEur(impW1)} → ${fmtEur(impW0)})`});
-  else if(deltaW>10)alertas.push({type:'green',icon:'📈',title:'Ventas al alza esta semana',desc:`+${deltaW.toFixed(1)}% vs semana anterior (${fmtEur(impW1)} → ${fmtEur(impW0)})`});
-  else alertas.push({type:'yellow',icon:'~',title:'Ventas estables esta semana',desc:`${deltaW.toFixed(1)}% vs semana anterior`});
-
-  // Albaranes con precio elevado
+  if(deltaW<-10)alertas.push({type:'red',icon:'📉',title:'Ventas a la baja',desc:`${deltaW.toFixed(1)}% vs semana anterior`});
+  else if(deltaW>10)alertas.push({type:'green',icon:'📈',title:'Ventas al alza',desc:`+${deltaW.toFixed(1)}% vs semana anterior`});
+  else alertas.push({type:'yellow',icon:'~',title:'Ventas estables',desc:`${deltaW.toFixed(1)}% vs semana anterior`});
   if(DATA.albaranes&&DATA.albaranes.length){
     const byProdPrecio={};
-    DATA.albaranes.forEach(r=>{
-      const p=r.producto;const pr=num(r.precio_ud);
-      if(!p||!pr)return;
-      if(!byProdPrecio[p])byProdPrecio[p]=[];
-      byProdPrecio[p].push(pr);
-    });
+    DATA.albaranes.forEach(r=>{const p=r.producto;const pr=num(r.precio_ud);if(!p||!pr)return;if(!byProdPrecio[p])byProdPrecio[p]=[];byProdPrecio[p].push(pr);});
     const subidas=[];
-    Object.entries(byProdPrecio).forEach(([p,precios])=>{
-      if(precios.length<2)return;
-      const ultimo=precios[precios.length-1];
-      const anterior=precios[precios.length-2];
-      const delta=(ultimo-anterior)/anterior*100;
-      if(delta>5)subidas.push(`${p.replace(/_/g,' ')}: +${delta.toFixed(1)}%`);
-    });
+    Object.entries(byProdPrecio).forEach(([p,precios])=>{if(precios.length<2)return;const ultimo=precios[precios.length-1];const anterior=precios[precios.length-2];const delta=(ultimo-anterior)/anterior*100;if(delta>5)subidas.push(`${p.replace(/_/g,' ')}: +${delta.toFixed(1)}%`);});
     if(subidas.length)alertas.push({type:'red',icon:'💶',title:'Subida de precio en albaranes',desc:subidas.join(' · ')});
-    else alertas.push({type:'green',icon:'💶',title:'Precios de proveedores estables',desc:'Sin subidas detectadas superiores al 5%'});
+    else alertas.push({type:'green',icon:'💶',title:'Precios de proveedores estables',desc:'Sin subidas superiores al 5%'});
   }
-
   el.innerHTML=`
     <div class="metrics">
-      <div class="metric"><div class="metric-label">Alertas activas</div><div class="metric-value">${alertas.filter(a=>a.type==='red').length}</div><div class="metric-sub">requieren atención</div></div>
-      <div class="metric"><div class="metric-label">Avisos</div><div class="metric-value">${alertas.filter(a=>a.type==='yellow').length}</div><div class="metric-sub">revisar</div></div>
-      <div class="metric"><div class="metric-label">Estado OK</div><div class="metric-value">${alertas.filter(a=>a.type==='green').length}</div><div class="metric-sub">bajo control</div></div>
+      <div class="metric"><div class="metric-label">Alertas activas</div><div class="metric-value" style="color:#c0392b">${alertas.filter(a=>a.type==='red').length}</div></div>
+      <div class="metric"><div class="metric-label">Avisos</div><div class="metric-value" style="color:#f39c12">${alertas.filter(a=>a.type==='yellow').length}</div></div>
+      <div class="metric"><div class="metric-label">Estado OK</div><div class="metric-value" style="color:#27ae60">${alertas.filter(a=>a.type==='green').length}</div></div>
     </div>
-    <div class="section-title">Estado del sistema</div>
-    ${alertas.map(a=>`
-      <div class="alert-card">
-        <div class="alert-icon ${a.type}">${a.icon}</div>
-        <div class="alert-body">
-          <div class="alert-title">${a.title}</div>
-          <div class="alert-desc">${a.desc}</div>
+    ${alertas.map(a=>`<div class="alert-card"><div class="alert-icon ${a.type}">${a.icon}</div><div class="alert-body"><div class="alert-title">${a.title}</div><div class="alert-desc">${a.desc}</div></div><span class="badge b-${a.type==='red'?'alert':a.type==='green'?'ok':'warn'}">${a.type==='red'?'Alerta':a.type==='green'?'OK':'Aviso'}</span></div>`).join('')}`;
+}
+
+function renderRegistrar(){
+  const el=document.getElementById('tab-registrar');
+  const optsProductos=TODOS_PRODUCTOS.map(p=>`<option value="${p}">${p.replace(/_/g,' ')}</option>`).join('');
+  el.innerHTML=`
+    <div class="tabs-form">
+      <button class="tab-form active" onclick="showForm('stock',this)">Stock</button>
+      <button class="tab-form" onclick="showForm('ventas',this)">Ventas</button>
+      <button class="tab-form" onclick="showForm('merma',this)">Merma</button>
+      <button class="tab-form" onclick="showForm('xls',this)">Importar XLS</button>
+    </div>
+
+    <div id="form-stock" class="form-card">
+      <h3>Registrar Stock</h3>
+      <div class="form-row">
+        <div class="field"><label>Tipo</label><select id="f-stock-tipo"><option value="sobrante">Sobrante (fin de día)</option><option value="encargo">Encargo (llegada)</option></select></div>
+        <div class="field"><label>Parada</label><select id="f-stock-parada"><option value="hernando_boqueria">Hernando Boqueria (ambas)</option><option value="boqueria_chicken">Boqueria Chicken</option><option value="mediterranean_food">Mediterranean Food</option></select></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label>Producto</label><select id="f-stock-prod"><option value="">Seleccionar...</option>${optsProductos}</select></div>
+        <div class="field"><label>O escribir producto</label><input type="text" id="f-stock-prod-txt" placeholder="nombre_producto"></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label>Cantidad</label><input type="number" id="f-stock-cant" placeholder="0" min="0"></div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" onclick="submitStock()">Guardar en Sheets</button>
+      </div>
+    </div>
+
+    <div id="form-ventas" class="form-card hidden">
+      <h3>Registrar Venta</h3>
+      <div class="form-row">
+        <div class="field"><label>Producto</label><select id="f-v-prod"><option value="">Seleccionar...</option>${optsProductos}</select></div>
+        <div class="field"><label>O escribir producto</label><input type="text" id="f-v-prod-txt" placeholder="nombre_producto"></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label>Cantidad</label><input type="number" id="f-v-cant" placeholder="0" min="0"></div>
+        <div class="field"><label>Importe (€)</label><input type="number" id="f-v-imp" placeholder="0.00" step="0.01" min="0"></div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" onclick="submitVentas()">Guardar en Sheets</button>
+      </div>
+    </div>
+
+    <div id="form-merma" class="form-card hidden">
+      <h3>Registrar Merma</h3>
+      <div class="form-row">
+        <div class="field"><label>Producto</label><select id="f-m-prod"><option value="">Seleccionar...</option>${optsProductos}</select></div>
+        <div class="field"><label>O escribir producto</label><input type="text" id="f-m-prod-txt" placeholder="nombre_producto"></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label>Cantidad</label><input type="number" id="f-m-cant" placeholder="0" min="0"></div>
+        <div class="field"><label>Motivo</label><input type="text" id="f-m-motivo" placeholder="caducado, dañado..."></div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" onclick="submitMerma()">Guardar en Sheets</button>
+      </div>
+    </div>
+
+    <div id="form-xls" class="form-card hidden">
+      <h3>Importar XLS de ventas</h3>
+      <div class="xls-drop" id="xls-drop" onclick="document.getElementById('xls-file').click()" ondragover="event.preventDefault()" ondrop="handleDrop(event)">
+        <p>Arrastra el XLS aquí o haz clic para seleccionar</p>
+        <small>Formato: columnas con Nombre Código articulo, CT, Importe</small>
+      </div>
+      <input type="file" id="xls-file" accept=".xls,.xlsx,.csv" style="display:none" onchange="handleFile(this.files[0])">
+      <div id="xls-preview"></div>
+      <div id="xls-actions" class="hidden">
+        <div class="progress-bar hidden" id="xls-progress-bar"><div class="progress-fill" id="xls-progress" style="width:0%"></div></div>
+        <div class="form-actions">
+          <span id="xls-count" style="font-size:13px;color:#888;align-self:center"></span>
+          <button class="btn" onclick="resetXLS()">Cancelar</button>
+          <button class="btn btn-primary" onclick="submitXLS()">Importar al Sheets</button>
         </div>
-        <span class="badge b-${a.type==='red'?'alert':a.type==='green'?'ok':'warn'}">${a.type==='red'?'Alerta':a.type==='green'?'OK':'Aviso'}</span>
-      </div>`).join('')}`;
+      </div>
+    </div>`;
+}
+
+function showForm(name, btn){
+  ['stock','ventas','merma','xls'].forEach(f=>document.getElementById('form-'+f).classList.add('hidden'));
+  document.getElementById('form-'+name).classList.remove('hidden');
+  document.querySelectorAll('.tab-form').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function getProd(selectId, txtId){
+  const txt=document.getElementById(txtId).value.trim();
+  const sel=document.getElementById(selectId).value;
+  return txt||sel;
+}
+
+async function submitStock(){
+  const producto=getProd('f-stock-prod','f-stock-prod-txt');
+  const cantidad=document.getElementById('f-stock-cant').value;
+  const tipo=document.getElementById('f-stock-tipo').value;
+  const parada=document.getElementById('f-stock-parada').value;
+  if(!producto||!cantidad){showToast('Completa producto y cantidad','error');return;}
+  try{
+    await postWebhook({accion:'stock',producto,cantidad:Number(cantidad),tipo,parada});
+    showToast('Stock guardado correctamente','success');
+    document.getElementById('f-stock-cant').value='';
+    document.getElementById('f-stock-prod-txt').value='';
+    document.getElementById('f-stock-prod').value='';
+  }catch(e){showToast('Error: '+e.message,'error');}
+}
+
+async function submitVentas(){
+  const producto=getProd('f-v-prod','f-v-prod-txt');
+  const cantidad=document.getElementById('f-v-cant').value;
+  const importe=document.getElementById('f-v-imp').value;
+  if(!producto||!cantidad){showToast('Completa producto y cantidad','error');return;}
+  try{
+    await postWebhook({accion:'ventas',producto,cantidad:Number(cantidad),importe:Number(importe||0)});
+    showToast('Venta guardada correctamente','success');
+    document.getElementById('f-v-cant').value='';
+    document.getElementById('f-v-imp').value='';
+    document.getElementById('f-v-prod-txt').value='';
+    document.getElementById('f-v-prod').value='';
+  }catch(e){showToast('Error: '+e.message,'error');}
+}
+
+async function submitMerma(){
+  const producto=getProd('f-m-prod','f-m-prod-txt');
+  const cantidad=document.getElementById('f-m-cant').value;
+  const motivo=document.getElementById('f-m-motivo').value;
+  if(!producto||!cantidad){showToast('Completa producto y cantidad','error');return;}
+  try{
+    await postWebhook({accion:'merma',producto,cantidad:Number(cantidad),motivo});
+    showToast('Merma guardada correctamente','success');
+    document.getElementById('f-m-cant').value='';
+    document.getElementById('f-m-motivo').value='';
+    document.getElementById('f-m-prod-txt').value='';
+    document.getElementById('f-m-prod').value='';
+  }catch(e){showToast('Error: '+e.message,'error');}
+}
+
+function handleDrop(e){e.preventDefault();const f=e.dataTransfer.files[0];if(f)handleFile(f);}
+
+function handleFile(file){
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      const wb=XLSX.read(e.target.result,{type:'binary'});
+      const ws=wb.Sheets[wb.SheetNames[0]];
+      const json=XLSX.utils.sheet_to_json(ws,{defval:''});
+      xlsData=json.filter(r=>{
+        const nombre=r['Nombre Código articulo']||r['Nombre Codigo articulo']||r['Nombre'||''];
+        const cant=r['CT']||r['Cantidad']||0;
+        const n=String(nombre).trim();
+        return n&&Number(cant)>0&&!n.toUpperCase().includes('SUBTOTAL')&&n.toUpperCase()!=='TOTAL';
+      }).map(r=>({
+        producto:String(r['Nombre Código articulo']||r['Nombre Codigo articulo']||r['Nombre']||'').trim(),
+        cantidad:Number(r['CT']||r['Cantidad']||0),
+        importe:Number(String(r['Importe']||0).replace(',','.'))
+      }));
+      if(!xlsData.length){showToast('No se encontraron productos válidos','error');return;}
+      const preview=document.getElementById('xls-preview');
+      preview.innerHTML=`<div class="table-wrap"><table><thead><tr><th>Producto</th><th style="text-align:right">Cant.</th><th style="text-align:right">Importe</th></tr></thead><tbody>${xlsData.slice(0,20).map(r=>`<tr><td>${r.producto}</td><td style="text-align:right">${r.cantidad}</td><td style="text-align:right">${r.importe.toFixed(2)}€</td></tr>`).join('')}${xlsData.length>20?`<tr><td colspan="3" style="text-align:center;color:#aaa;padding:8px">... y ${xlsData.length-20} más</td></tr>`:''}</tbody></table></div>`;
+      document.getElementById('xls-count').textContent=`${xlsData.length} productos listos para importar`;
+      document.getElementById('xls-actions').classList.remove('hidden');
+      document.getElementById('xls-drop').style.borderColor='#27ae60';
+    }catch(err){showToast('Error leyendo el archivo','error');}
+  };
+  reader.readAsBinaryString(file);
+}
+
+async function submitXLS(){
+  if(!xlsData.length)return;
+  const bar=document.getElementById('xls-progress-bar');
+  const fill=document.getElementById('xls-progress');
+  bar.classList.remove('hidden');
+  let ok=0;
+  for(let i=0;i<xlsData.length;i++){
+    try{
+      await postWebhook({accion:'ventas',...xlsData[i]});
+      ok++;
+    }catch(e){}
+    fill.style.width=Math.round((i+1)/xlsData.length*100)+'%';
+  }
+  showToast(`${ok}/${xlsData.length} registros importados`,'success');
+  setTimeout(resetXLS,1500);
+}
+
+function resetXLS(){
+  xlsData=[];
+  document.getElementById('xls-preview').innerHTML='';
+  document.getElementById('xls-actions').classList.add('hidden');
+  document.getElementById('xls-progress-bar').classList.add('hidden');
+  document.getElementById('xls-progress').style.width='0%';
+  document.getElementById('xls-drop').style.borderColor='#ddd';
+  document.getElementById('xls-file').value='';
+}
+
+function exportCSV(tipo){
+  let rows,headers,filename;
+  if(tipo==='ventas'){rows=ventasRows();headers=['fecha_hora','parada','producto','cantidad','importe'];filename='ventas.csv';}
+  else if(tipo==='stock'){rows=DATA.stock.filter(r=>r.producto);headers=['fecha_hora','parada','producto','cantidad','_tipo'];filename='stock.csv';}
+  else if(tipo==='merma'){rows=DATA.merma.filter(r=>r.producto);headers=['fecha_hora','parada','producto','cantidad','motivo'];filename='merma.csv';}
+  else if(tipo==='albaranes'){rows=DATA.albaranes;headers=['fecha_registro','proveedor','producto','cantidad','unidad','precio_ud','total_linea'];filename='albaranes.csv';}
+  const csv=[headers.join(','),...rows.map(r=>headers.map(h=>'"'+(r[h]||'').toString().replace(/"/g,'""')+'"').join(','))].join('\n');
+  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download=filename;a.click();
 }
 
 function renderReporte(){
   const el=document.getElementById('tab-reportes');
   const rows=DATA.reporte.filter(r=>r.fecha_hora).slice().reverse();
-  el.innerHTML=rows.length?rows.map(r=>`
-    <div class="reporte-card">
-      <div class="reporte-fecha">${r.fecha_hora}</div>
-      <div class="reporte-body">${(r.reporte||'').slice(0,1500)}${(r.reporte||'').length>1500?'\n…':''}</div>
-    </div>`).join(''):'<div class="empty">Sin reportes generados todavía.</div>';
+  el.innerHTML=rows.length?rows.map(r=>`<div class="reporte-card"><div class="reporte-fecha">${r.fecha_hora}</div><div class="reporte-body">${(r.reporte||'').slice(0,1500)}${(r.reporte||'').length>1500?'\n…':''}</div></div>`).join(''):'<div class="empty">Sin reportes todavía.</div>';
 }
 </script>
 </body>
