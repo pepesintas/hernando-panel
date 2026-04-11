@@ -543,6 +543,7 @@ function renderRegistrar(){
       <button class="tab-form" onclick="showForm('ventas',this)">Ventas</button>
       <button class="tab-form" onclick="showForm('merma',this)">Merma</button>
       <button class="tab-form" onclick="showForm('xls',this)">Importar XLS</button>
+      <button class="tab-form" onclick="showForm('foto',this)">Importar Foto TPV</button>
     </div>
 
     <div id="form-stock" class="form-card">
@@ -607,6 +608,25 @@ function renderRegistrar(){
           <span id="xls-count" style="font-size:13px;color:#888;align-self:center"></span>
           <button class="btn" onclick="resetXLS()">Cancelar</button>
           <button class="btn btn-primary" onclick="submitXLS()">Importar al Sheets</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="form-foto" class="form-card hidden">
+      <h3>Importar foto TPV</h3>
+      <p style="font-size:13px;color:#888;margin-bottom:1rem">Sube una foto de la pantalla del TPV. GPT-4o extraerá los productos automáticamente y los guardará en Ventas.</p>
+      <div class="xls-drop" id="foto-drop" onclick="document.getElementById('foto-file').click()" ondragover="event.preventDefault()" ondrop="handleFotoDrop(event)">
+        <p>Arrastra la foto aquí o haz clic para seleccionar</p>
+        <small>Formatos: JPG, PNG, WEBP</small>
+      </div>
+      <input type="file" id="foto-file" accept="image/jpeg,image/png,image/webp" style="display:none" onchange="handleFotoFile(this.files[0])">
+      <div id="foto-preview" style="margin-bottom:1rem"></div>
+      <div id="foto-actions" class="hidden">
+        <div class="progress-bar hidden" id="foto-progress-bar"><div class="progress-fill" id="foto-progress" style="width:0%"></div></div>
+        <div class="form-actions">
+          <span id="foto-status" style="font-size:13px;color:#888;align-self:center"></span>
+          <button class="btn" onclick="resetFoto()">Cancelar</button>
+          <button class="btn btn-primary" onclick="submitFoto()">Procesar con IA y guardar</button>
         </div>
       </div>
     </div>`;
@@ -726,6 +746,62 @@ function resetXLS(){
   document.getElementById('xls-progress').style.width='0%';
   document.getElementById('xls-drop').style.borderColor='#ddd';
   document.getElementById('xls-file').value='';
+}
+
+function handleFotoDrop(e){e.preventDefault();const f=e.dataTransfer.files[0];if(f)handleFotoFile(f);}
+
+function handleFotoFile(file){
+  if(!file)return;
+  if(!file.type.startsWith('image/')){showToast('Solo se aceptan imágenes JPG, PNG o WEBP','error');return;}
+  const reader=new FileReader();
+  reader.onload=function(e){
+    const dataUrl=e.target.result;
+    const base64=dataUrl.split(',')[1];
+    const mimeType=file.type;
+    document.getElementById('foto-preview').innerHTML=`
+      <div style="margin-bottom:1rem">
+        <img src="${dataUrl}" style="max-width:100%;max-height:300px;border-radius:8px;border:1px solid #e5e5e0">
+        <p style="font-size:12px;color:#888;margin-top:6px">${file.name} · ${(file.size/1024).toFixed(0)}KB</p>
+      </div>`;
+    document.getElementById('foto-drop').style.borderColor='#27ae60';
+    document.getElementById('foto-actions').classList.remove('hidden');
+    document.getElementById('foto-status').textContent='Foto lista para procesar';
+    document.getElementById('foto-file')._base64=base64;
+    document.getElementById('foto-file')._mimeType=mimeType;
+  };
+  reader.readAsDataURL(file);
+}
+
+async function submitFoto(){
+  const input=document.getElementById('foto-file');
+  const base64=input._base64;
+  const mimeType=input._mimeType||'image/jpeg';
+  if(!base64){showToast('Selecciona una foto primero','error');return;}
+  document.getElementById('foto-status').textContent='Enviando a IA...';
+  document.getElementById('foto-progress-bar').classList.remove('hidden');
+  document.getElementById('foto-progress').style.width='30%';
+  try{
+    const res=await postWebhook({accion:'foto_tpv',base64,mimeType});
+    document.getElementById('foto-progress').style.width='100%';
+    showToast('Foto procesada y ventas guardadas','success');
+    document.getElementById('foto-status').textContent='Completado';
+    setTimeout(resetFoto,2000);
+  }catch(e){
+    showToast('Error: '+e.message,'error');
+    document.getElementById('foto-status').textContent='Error procesando';
+    document.getElementById('foto-progress-bar').classList.add('hidden');
+  }
+}
+
+function resetFoto(){
+  document.getElementById('foto-preview').innerHTML='';
+  document.getElementById('foto-actions').classList.add('hidden');
+  document.getElementById('foto-progress-bar').classList.add('hidden');
+  document.getElementById('foto-progress').style.width='0%';
+  document.getElementById('foto-drop').style.borderColor='#ddd';
+  document.getElementById('foto-file').value='';
+  document.getElementById('foto-file')._base64=null;
+  document.getElementById('foto-status').textContent='';
 }
 
 function exportCSV(tipo){
