@@ -702,10 +702,15 @@ function handleFile(file){
       const ws=wb.Sheets[wb.SheetNames[0]];
       const json=XLSX.utils.sheet_to_json(ws,{defval:''});
       xlsData=json.filter(r=>{
-        const nombre=r['Nombre Código articulo']||r['Nombre Codigo articulo']||r['Nombre'||''];
+        const nombre=r['Nombre Código articulo']||r['Nombre Codigo articulo']||r['Nombre']||'';
         const cant=r['CT']||r['Cantidad']||0;
         const n=String(nombre).trim();
-        return n&&Number(cant)>0&&!n.toUpperCase().includes('SUBTOTAL')&&n.toUpperCase()!=='TOTAL';
+        if(!n) return false;
+        if(Number(cant)<=0) return false;
+        if(n.toUpperCase().includes('SUBTOTAL')) return false;
+        if(n.toUpperCase()==='TOTAL') return false;
+        if(n.toUpperCase().includes('FAMILIA')) return false;
+        return true;
       }).map(r=>({
         producto:String(r['Nombre Código articulo']||r['Nombre Codigo articulo']||r['Nombre']||'').trim(),
         cantidad:Number(r['CT']||r['Cantidad']||0),
